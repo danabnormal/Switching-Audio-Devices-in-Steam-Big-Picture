@@ -1,0 +1,1 @@
+(Get-AudioDevice -list | Where-Object Name -like ("YOURSTREAMINGDEVICENAMEHERE") | Set-AudioDevice).Name
