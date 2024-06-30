@@ -6,6 +6,13 @@ After finishing the session the hosts audio device SHOULD switch back to your de
 
 This guide walks you through setting up options within Steam allowing you to switch audio devices on your host using just a controller in Big Picture mode (and therefore also when accessing the system remotely).
 
+
+## TLDR
+* Install the PowerShell package `AudioDeviceCmdlets` with the command `Install-Module -Name AudioDeviceCmdlets` in an administrator PowerShell window.
+* Use the command `Get-AudioDevice -list | Format-Table` to find the names of the appropriate audio devices.
+* Create a PowerShell script containing the command `(Get-AudioDevice -list | Where-Object Name -like ("YOURDEVICENAMEHERE") | Set-AudioDevice)` where `YOURDEVICENAMEHERE` is the name of the device you want to switch to.
+* Add a non-Steam game to your library pointing to `C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe` and set the `Launch Options` to the location of your PowerShell script.
+
 ## NOTES
 This relies on Powershell scripts for executing the commands needed to switch audio devices. 
 
@@ -18,12 +25,6 @@ It is up to you to decide what security level you are happy with when it comes t
 Remember - for the sake of these instructions any mention of `streaming` refers to the playing of games remotely (using Steam Remote Play or similar) from a host machine to another machine (such as a Steam Deck), not the broadcast of gameplay to a streaming site such as Twitch.
 
 If you know what you're doing you'll be able to make this cleaner (a single script that switches between two devices, embedding the command itself in the Steam game negating the need for scripts etc) but this should just do for most people.
-
-## TLDR
-* Install the PowerShell package `AudioDeviceCmdlets` with the command `Install-Module -Name AudioDeviceCmdlets` in an administrator PowerShell window.
-* Use the command `Get-AudioDevice -list | Format-Table` to find the names of the appropriate audio devices.
-* Create a PowerShell script containing the command `(Get-AudioDevice -list | Where-Object Name -like ("YOURDEVICENAMEHERE") | Set-AudioDevice)` where `YOURDEVICENAMEHERE` is the name of the device you want to switch to.
-* Add a non-Steam game to your library pointing to `C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe` and set the `Launch Options` to the location of your PowerShell script.
 
 ## INSTRUCTIONS
 All the following should be done on your 'host' machine (the one that you stream games from, not to).
